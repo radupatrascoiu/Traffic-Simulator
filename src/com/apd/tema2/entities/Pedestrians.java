@@ -31,7 +31,7 @@ public class Pedestrians implements Runnable {
                 if(pedestriansNo == maxPedestriansNo) {
                     pedestriansNo = 0;
                     pass = true;
-                    wait(Constants.PEDESTRIAN_PASSING_TIME);
+                    sleep(Constants.PEDESTRIAN_PASSING_TIME);
                     pass = false;
                 }
             } catch (InterruptedException e) {
