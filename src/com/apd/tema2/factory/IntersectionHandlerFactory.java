@@ -5,6 +5,8 @@ import com.apd.tema2.entities.*;
 import com.apd.tema2.intersections.*;
 import com.apd.tema2.utils.Constants;
 
+import java.util.concurrent.BrokenBarrierException;
+
 import static java.lang.Thread.sleep;
 
 /**
@@ -28,63 +30,20 @@ public class IntersectionHandlerFactory {
         // unmarked intersection
         // cars racing
         return switch (handlerType) {
-            case "simple_semaphore" -> new IntersectionHandler() {
-                @Override
-                public void handle(Car car) {
-
-                }
+            case "simple_semaphore", "simple_n_roundabout", "simple_strict_1_car_roundabout", "simple_strict_x_car_roundabout", "crosswalk" -> car -> {
+                Intersection intersection = Main.intersection;
+                intersection.handleCar(car);
             };
-            case "simple_n_roundabout" -> new IntersectionHandler() {
-                @Override
-                public void handle(Car car) {
+            case "simple_max_x_car_roundabout", "priority_intersection" -> car -> {
+                Intersection intersection = Main.intersection;
 
-                }
-            };
-            case "simple_strict_1_car_roundabout" -> new IntersectionHandler() {
-                @Override
-                public void handle(Car car) {
+                try {
+                    sleep(car.getWaitingTime());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } // NU MODIFICATI
 
-                }
-            };
-            case "simple_strict_x_car_roundabout" -> new IntersectionHandler() {
-                @Override
-                public void handle(Car car) {
-
-                }
-            };
-            case "simple_max_x_car_roundabout" -> new IntersectionHandler() {
-                @Override
-                public void handle(Car car) {
-                    // Get your Intersection instance
-
-                    try {
-                        sleep(car.getWaitingTime());
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } // NU MODIFICATI
-
-                    // Continuati de aici
-                }
-            };
-            case "priority_intersection" -> new IntersectionHandler() {
-                @Override
-                public void handle(Car car) {
-                    // Get your Intersection instance
-
-                    try {
-                        sleep(car.getWaitingTime());
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } // NU MODIFICATI
-
-                    // Continuati de aici
-                }
-            };
-            case "crosswalk" -> new IntersectionHandler() {
-                @Override
-                public void handle(Car car) {
-                    
-                }
+                intersection.handleCar(car);
             };
             case "simple_maintenance" -> new IntersectionHandler() {
                 @Override

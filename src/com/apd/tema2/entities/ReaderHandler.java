@@ -8,5 +8,5 @@ import java.io.IOException;
  * campuri.
  */
 public interface ReaderHandler {
-    public void handle(final String handlerType, final BufferedReader br) throws IOException;
+    void handle(final String handlerType, final BufferedReader br) throws IOException;
 }

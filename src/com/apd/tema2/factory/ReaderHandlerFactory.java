@@ -7,6 +7,8 @@ import com.apd.tema2.intersections.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.concurrent.Semaphore;
 
 /**
  * Returneaza sub forma unor clase anonime implementari pentru metoda de citire din fisier.
@@ -27,67 +29,46 @@ public class ReaderHandlerFactory {
         // unmarked intersection
         // cars racing
         return switch (handlerType) {
-            case "simple_semaphore" -> new ReaderHandler() {
-                @Override
-                public void handle(final String handlerType, final BufferedReader br) {
-                    // Exemplu de utilizare:
-                    // Main.intersection = IntersectionFactory.getIntersection("simpleIntersection");
-                }
+            case "simple_semaphore" -> (handlerType12, br) -> {
+                // Exemplu de utilizare:
+                Main.intersection = IntersectionFactory.getIntersection("simpleIntersection");
             };
-            case "simple_n_roundabout" -> new ReaderHandler() {
-                @Override
-                public void handle(final String handlerType, final BufferedReader br) throws IOException {
-                    // To parse input line use:
-                    // String[] line = br.readLine().split(" ");
-                }
+            case "simple_n_roundabout" -> (handlerType1, br) -> {
+                String[] line = br.readLine().split(" ");
+                Main.intersection = IntersectionFactory.getIntersection("simpleNRoundabout");
+                SimpleNRoundabout.build(Integer.parseInt(line[1]), new Semaphore(Integer.parseInt(line[0])));
             };
-            case "simple_strict_1_car_roundabout" -> new ReaderHandler() {
-                @Override
-                public void handle(final String handlerType, final BufferedReader br) throws IOException {
+            case "simple_strict_1_car_roundabout" -> (handlerType13, br) -> {
+                String[] line = br.readLine().split(" ");
+                Main.intersection = IntersectionFactory.getIntersection("simpleStrict1CarRoundabout");
+                SimpleStrict1CarRoundabout.build(Integer.parseInt(line[1]), Integer.parseInt(line[0]));
+            };
+            case "simple_strict_x_car_roundabout" -> (handlerType14, br) -> {
+                String[] line = br.readLine().split(" ");
+                Main.intersection = IntersectionFactory.getIntersection("simpleStrictXCarRoundabout");
+                SimpleStrictXCarRoundabout.build(Integer.parseInt(line[2]), Integer.parseInt(line[1]), Integer.parseInt(line[0]));
+            };
+            case "simple_max_x_car_roundabout"-> (handlerType14, br) -> {
+                String[] line = br.readLine().split(" ");
+                Main.intersection = IntersectionFactory.getIntersection("simpleMaxXCarRoundabout");
+                SimpleMaxXCarRoundabout.build(Integer.parseInt(line[2]), Integer.parseInt(line[1]), Integer.parseInt(line[0]));
+            };
+            case "priority_intersection" -> (ReaderHandler) (handlerType19, br) -> {
 
-                }
             };
-            case "simple_strict_x_car_roundabout" -> new ReaderHandler() {
-                @Override
-                public void handle(final String handlerType, final BufferedReader br) throws IOException {
+            case "crosswalk" -> (handlerType15, br) -> {
+                String[] line = br.readLine().split(" ");
+                Main.intersection = IntersectionFactory.getIntersection("crosswalk");
+                Main.pedestrians = new Pedestrians(Integer.parseInt(line[0]), Integer.parseInt(line[1]));
+            };
+            case "simple_maintenance" -> (handlerType16, br) -> {
 
-                }
             };
-            case "simple_max_x_car_roundabout" -> new ReaderHandler() {
-                @Override
-                public void handle(final String handlerType, final BufferedReader br) throws IOException {
-                    
-                }
+            case "complex_maintenance" -> (handlerType17, br) -> {
+
             };
-            case "priority_intersection" -> new ReaderHandler() {
-                @Override
-                public void handle(final String handlerType, final BufferedReader br) throws IOException {
-                    
-                }
-            };
-            case "crosswalk" -> new ReaderHandler() {
-                @Override
-                public void handle(final String handlerType, final BufferedReader br) throws IOException {
-                    
-                }
-            };
-            case "simple_maintenance" -> new ReaderHandler() {
-                @Override
-                public void handle(final String handlerType, final BufferedReader br) throws IOException {
-                    
-                }
-            };
-            case "complex_maintenance" -> new ReaderHandler() {
-                @Override
-                public void handle(final String handlerType, final BufferedReader br) throws IOException {
-                    
-                }
-            };
-            case "railroad" -> new ReaderHandler() {
-                @Override
-                public void handle(final String handlerType, final BufferedReader br) throws IOException {
-                    
-                }
+            case "railroad" -> (handlerType18, br) -> {
+
             };
             default -> null;
         };

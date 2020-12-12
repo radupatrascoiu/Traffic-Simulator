@@ -1,5 +1,7 @@
 package com.apd.tema2.entities;
 
+import java.util.concurrent.BrokenBarrierException;
+
 /**
  * Clasa Thread principala.
  */
@@ -10,6 +12,7 @@ public class Car implements Runnable {
     private final int priority;
     private final int waitingTime;
     private final IntersectionHandler intersectionHandler;
+    private String color;
 
     public Car(final int id, final int startDirection, final IntersectionHandler intersectionHandler) {
         this(id, startDirection, -1, 0, intersectionHandler, 1);
@@ -34,7 +37,11 @@ public class Car implements Runnable {
 
     @Override
     public void run() {
-        intersectionHandler.handle(this);
+        try {
+            intersectionHandler.handle(this);
+        } catch (InterruptedException | BrokenBarrierException e) {
+            e.printStackTrace();
+        }
     }
 
     public int getId() {
@@ -51,5 +58,13 @@ public class Car implements Runnable {
 
     public int getPriority() {
         return priority;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }
