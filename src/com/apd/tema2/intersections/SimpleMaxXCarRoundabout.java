@@ -24,7 +24,7 @@ public class SimpleMaxXCarRoundabout implements Intersection {
     }
 
     @Override
-    public void handleCar(Car car) throws InterruptedException, BrokenBarrierException {
+    public void handle(Car car) throws InterruptedException, BrokenBarrierException {
         System.out.println("Car " + car.getId() + " has reached the roundabout from lane " +
                 car.getStartDirection());
 

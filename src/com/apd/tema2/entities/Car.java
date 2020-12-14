@@ -67,4 +67,8 @@ public class Car implements Runnable {
     public void setColor(String color) {
         this.color = color;
     }
+
+    public int getEndDirection() {
+        return endDirection;
+    }
 }

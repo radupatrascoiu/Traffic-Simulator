@@ -7,8 +7,8 @@ import java.util.concurrent.BrokenBarrierException;
 
 public class Crosswalk implements Intersection {
     @Override
-    public void handleCar(Car car) throws InterruptedException, BrokenBarrierException {
-        String color;
+    public void handle(Car car) throws InterruptedException, BrokenBarrierException {
+        String color = "red";
         while (!Main.pedestrians.isFinished()) {
             synchronized (this) {
                 color = Main.pedestrians.isPass() ? "red" : "green";

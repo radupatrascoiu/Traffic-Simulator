@@ -7,5 +7,5 @@ import java.util.concurrent.BrokenBarrierException;
  * Implementarile acesteia vor contine variabile specifice task-ului, respectiv mecanisme de sincronizare.
  */
 public interface Intersection {
-    void handleCar(Car car) throws InterruptedException, BrokenBarrierException;
+    void handle(Car car) throws InterruptedException, BrokenBarrierException;
 }

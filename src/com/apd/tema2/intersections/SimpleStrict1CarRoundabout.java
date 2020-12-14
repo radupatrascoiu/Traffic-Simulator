@@ -23,7 +23,7 @@ public class SimpleStrict1CarRoundabout implements Intersection {
     }
 
     @Override
-    public void handleCar(Car car) throws InterruptedException {
+    public void handle(Car car) throws InterruptedException {
         System.out.println("Car " + car.getId() + " has reached the roundabout");
         semaphores.get(car.getStartDirection()).acquire();
         System.out.println("Car " + car.getId() + " has entered the roundabout from lane " +

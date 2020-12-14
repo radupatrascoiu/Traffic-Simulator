@@ -7,7 +7,7 @@ import java.util.concurrent.BrokenBarrierException;
 
 public class ComplexMaintenance implements Intersection {
     @Override
-    public void handleCar(Car car) throws InterruptedException, BrokenBarrierException {
+    public void handle(Car car) throws InterruptedException, BrokenBarrierException {
 
     }
 }

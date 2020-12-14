@@ -2,10 +2,6 @@ package com.apd.tema2.factory;
 
 import com.apd.tema2.Main;
 import com.apd.tema2.entities.*;
-import com.apd.tema2.intersections.*;
-import com.apd.tema2.utils.Constants;
-
-import java.util.concurrent.BrokenBarrierException;
 
 import static java.lang.Thread.sleep;
 
@@ -30,9 +26,9 @@ public class IntersectionHandlerFactory {
         // unmarked intersection
         // cars racing
         return switch (handlerType) {
-            case "simple_semaphore", "simple_n_roundabout", "simple_strict_1_car_roundabout", "simple_strict_x_car_roundabout", "crosswalk" -> car -> {
+            case "simple_semaphore", "simple_n_roundabout", "simple_strict_1_car_roundabout", "simple_strict_x_car_roundabout", "crosswalk", "simple_maintenance" -> car -> {
                 Intersection intersection = Main.intersection;
-                intersection.handleCar(car);
+                intersection.handle(car);
             };
             case "simple_max_x_car_roundabout", "priority_intersection" -> car -> {
                 Intersection intersection = Main.intersection;
@@ -43,13 +39,7 @@ public class IntersectionHandlerFactory {
                     e.printStackTrace();
                 } // NU MODIFICATI
 
-                intersection.handleCar(car);
-            };
-            case "simple_maintenance" -> new IntersectionHandler() {
-                @Override
-                public void handle(Car car) {
-                    
-                }
+                intersection.handle(car);
             };
             case "complex_maintenance" -> new IntersectionHandler() {
                 @Override

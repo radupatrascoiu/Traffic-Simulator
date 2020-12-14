@@ -17,7 +17,7 @@ public class SimpleNRoundabout implements Intersection {
     }
 
     @Override
-    public void handleCar(Car car) throws InterruptedException {
+    public void handle(Car car) throws InterruptedException {
         System.out.println("Car " + car.getId() + " has reached the roundabout, now waiting...");
         semaphore.acquire();
         System.out.println("Car " + car.getId() + " has entered the roundabout");
