@@ -71,7 +71,8 @@ public class ReaderHandlerFactory {
 
             };
             case "railroad" -> (handlerType18, br) -> {
-
+                Main.intersection = IntersectionFactory.getIntersection("railRoad");
+                RailRoad.build();
             };
             default -> null;
         };
