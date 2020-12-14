@@ -55,7 +55,7 @@ public class ReaderHandlerFactory {
             case "priority_intersection" -> (ReaderHandler) (handlerType19, br) -> {
                 String[] line = br.readLine().split(" ");
                 Main.intersection = IntersectionFactory.getIntersection("priorityIntersection");
-                PriorityIntersection.build(Integer.parseInt(line[1]), Integer.parseInt(line[0]));
+                PriorityIntersection.build();
             };
             case "crosswalk" -> (handlerType15, br) -> {
                 String[] line = br.readLine().split(" ");
