@@ -25,20 +25,24 @@ public class SimpleMaxXCarRoundabout implements Intersection {
 
     @Override
     public void handle(Car car) throws InterruptedException, BrokenBarrierException {
-        System.out.println("Car " + car.getId() + " has reached the roundabout from lane " +
+        System.out.println("Car " + car.getId() +
+                " has reached the roundabout from lane " +
                 car.getStartDirection());
 
         // pentru fiecare directie
         semaphores.get(car.getStartDirection()).acquire();
 
-        System.out.println("Car " + car.getId() + " has entered the roundabout from lane " +
+        System.out.println("Car " + car.getId() +
+                " has entered the roundabout from lane " +
                 car.getStartDirection());
 
         // fiecare masina sta un timp in sensul giratoriu
         sleep(timeToWait);
 
-        System.out.println("Car " + car.getId() + " has exited the roundabout after " + (timeToWait / 1000) +
+        System.out.println("Car " + car.getId() +
+                " has exited the roundabout after " + (timeToWait / 1000) +
                 " seconds");
+
         // dupa ce a iesit o masina se da release
         semaphores.get(car.getStartDirection()).release();
     }

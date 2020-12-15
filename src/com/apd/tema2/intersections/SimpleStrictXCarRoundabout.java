@@ -35,20 +35,23 @@ public class SimpleStrictXCarRoundabout implements Intersection {
 
     @Override
     public void handle(Car car) throws InterruptedException, BrokenBarrierException {
-        System.out.println("Car " + car.getId() + " has reached the roundabout, now waiting...");
-        // asteptam sa ajunga toata masinile dintr-o runda
+        System.out.println("Car " + car.getId() +
+                " has reached the roundabout, now waiting...");
+        // asteptam sa ajunga toata masinile
         startBarrier.await();
 
         // pentru fiecare directie
         semaphores.get(car.getStartDirection()).acquire();
 
-        System.out.println("Car " + car.getId() + " was selected to enter the roundabout from lane " +
+        System.out.println("Car " + car.getId() +
+                " was selected to enter the roundabout from lane " +
                 car.getStartDirection());
 
         // asteptam sa iasa toate masinile dintr-o runda
         exitBarrier.await();
 
-        System.out.println("Car " + car.getId() + " has entered the roundabout from lane " +
+        System.out.println("Car " + car.getId() +
+                " has entered the roundabout from lane " +
                 car.getStartDirection());
 
         // asteptam sa intre toate in sens
@@ -57,7 +60,8 @@ public class SimpleStrictXCarRoundabout implements Intersection {
         // fiecare masina sta un timp in sensul giratoriu
         sleep(timeToWait);
 
-        System.out.println("Car " + car.getId() + " has exited the roundabout after " + (timeToWait / 1000) +
+        System.out.println("Car " + car.getId() +
+                " has exited the roundabout after " + (timeToWait / 1000) +
                         " seconds");
         // dupa ce a iesit o masina se da release
         semaphores.get(car.getStartDirection()).release();

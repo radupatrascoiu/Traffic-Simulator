@@ -9,8 +9,13 @@ public class SimpleIntersection implements Intersection {
 
     @Override
     public void handle(Car car) throws InterruptedException {
-        System.out.println("Car " + car.getId() + " has reached the semaphore, now waiting...");
+        System.out.println("Car " + car.getId() +
+                " has reached the semaphore, now waiting...");
+
+        // fiecare masina asteapta un timp specific
         sleep(car.getWaitingTime());
-        System.out.println("Car " + car.getId() + " has waited enough, now driving...");
+
+        System.out.println("Car " + car.getId() +
+                " has waited enough, now driving...");
     }
 }

@@ -12,7 +12,9 @@ public class Crosswalk implements Intersection {
         while (!Main.pedestrians.isFinished()) {
             synchronized (this) {
                 color = Main.pedestrians.isPass() ? "red" : "green";
+                // daca este prima trecere sau culoarea nu a fost schimbata
                 if (car.getColor() == null || !car.getColor().equals(color)) {
+                    // setam noua culoare
                     car.setColor(color);
                     System.out.println("Car " + car.getId() + " has now " + car.getColor() + " light");
                 }

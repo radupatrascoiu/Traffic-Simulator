@@ -18,7 +18,8 @@ public class SimpleMaintenance implements Intersection {
 
     @Override
     public void handle(Car car) throws InterruptedException, BrokenBarrierException {
-        System.out.println("Car " + car.getId() + " from side number " + car.getStartDirection() + " has reached the bottleneck");
+        System.out.println("Car " + car.getId() + " from side number " +
+                car.getStartDirection() + " has reached the bottleneck");
 
         if (car.getStartDirection() == 0) {
             semaphoreForCarsWithPriority.acquire();
@@ -26,12 +27,14 @@ public class SimpleMaintenance implements Intersection {
             // daca nu as avea bariera, un singur release pe semaforul 2 ar face o
             // masina de pe sensul 1 sa plece, astfel nu s-ar mai respecta cerinta
             barrierForPriority.await();
-            System.out.println("Car " + car.getId() + " from side number " + car.getStartDirection() + " has passed the bottleneck");
+            System.out.println("Car " + car.getId() + " from side number " +
+                    car.getStartDirection() + " has passed the bottleneck");
             semaphoreForCarsWithoutPriority.release();
         } else {
             semaphoreForCarsWithoutPriority.acquire();
             barrierForPriority.await();
-            System.out.println("Car " + car.getId() + " from side number " + car.getStartDirection() + " has passed the bottleneck");
+            System.out.println("Car " + car.getId() + " from side number " +
+                    car.getStartDirection() + " has passed the bottleneck");
             semaphoreForCarsWithPriority.release();
         }
     }

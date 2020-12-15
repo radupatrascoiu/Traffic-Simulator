@@ -16,18 +16,6 @@ import java.util.concurrent.Semaphore;
 public class ReaderHandlerFactory {
 
     public static ReaderHandler getHandler(String handlerType) {
-        // simple semaphore intersection
-        // max random N cars roundabout (s time to exit each of them)
-        // roundabout with exactly one car from each lane simultaneously
-        // roundabout with exactly X cars from each lane simultaneously
-        // roundabout with at most X cars from each lane simultaneously
-        // entering a road without any priority
-        // crosswalk activated on at least a number of people (s time to finish all of them)
-        // road in maintenance - 1 lane 2 ways, X cars at a time
-        // road in maintenance - N lanes 2 ways, X cars at a time
-        // railroad blockage for T seconds for all the cars
-        // unmarked intersection
-        // cars racing
         return switch (handlerType) {
             case "simple_semaphore" -> (handlerType12, br) -> {
                 Main.intersection = IntersectionFactory.getIntersection("simpleIntersection");

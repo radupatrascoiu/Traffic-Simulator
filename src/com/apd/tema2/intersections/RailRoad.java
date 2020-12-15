@@ -23,7 +23,8 @@ public class RailRoad implements Intersection {
     @Override
     public void handle(Car car) throws InterruptedException, BrokenBarrierException {
         synchronized (this) {
-            System.out.println("Car " + car.getId() + " from side number " + car.getStartDirection() + " has stopped by the railroad");
+            System.out.println("Car " + car.getId() + " from side number " +
+                    car.getStartDirection() + " has stopped by the railroad");
             if (car.getStartDirection() == 0) {
                 carQueueLane0.put(car);
             } else {
@@ -31,20 +32,27 @@ public class RailRoad implements Intersection {
             }
         }
 
+        // asteptam sa ajunga toate masinile
         barrier.await();
 
+        // verificam daca a mai fost afisat mesajul
         if (!ok) {
             System.out.println("The train has passed, cars can now proceed");
             ok = true;
         }
 
         synchronized (this) {
+            // verificam fiecare coada si afisam mesajele corespunzatoare masinilor
             if (!carQueueLane0.isEmpty()) {
-                System.out.println("Car " + carQueueLane0.getFirst().getId() + " from side number " + carQueueLane0.take().getStartDirection() + " has started driving");
+                System.out.println("Car " + carQueueLane0.getFirst().getId() +
+                        " from side number " + carQueueLane0.take().getStartDirection() +
+                        " has started driving");
             }
 
             if (!carQueueLane1.isEmpty()) {
-                System.out.println("Car " + carQueueLane1.getFirst().getId() + " from side number " + carQueueLane1.take().getStartDirection() + " has started driving");
+                System.out.println("Car " + carQueueLane1.getFirst().getId() +
+                        " from side number " + carQueueLane1.take().getStartDirection() +
+                        " has started driving");
             }
         }
     }
